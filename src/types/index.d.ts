@@ -1,0 +1,7 @@
+interface ILoginByPwd {
+
+}
+
+interface UserInfo {
+
+}
