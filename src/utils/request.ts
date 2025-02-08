@@ -19,11 +19,11 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   async (response: AxiosResponse) => {
-    const { status, code } = response.data
+    const { code } = response.data
     // 成功
-    if ([status, code].includes(200)) {
+    if (code === 200) {
       return response.data.data
-    } else if ([status, code].includes(401)) {
+    } else if (code === 401) {
       // token失效
     } else {
       // 错误提示吐司
@@ -36,30 +36,22 @@ request.interceptors.response.use(
   },
 )
 
-// post请求
-export function post(url: string, data: any = {}, config = {}): Promise<[any, any]> {
+export function post<T = any>(url: string, data: any = {}, config: any = {}): Promise<[any, T]> {
   return new Promise((resolve) => {
-    request
-      .post(url, data, config)
-      .then((res: any) => {
-        resolve([null, res])
-      })
-      .catch((err: any) => {
-        resolve([err, null])
-      })
+    request.post(url, data, config).then((res) => {
+      resolve([null, res as T])
+    }).catch((err) => {
+      resolve([err, undefined as T])
+    })
   })
 }
 
-// get请求
-export function get(url: string, params = {}, config: any = {}): Promise<[any, any]> {
+export function get<T = any>(url: string, data: any = {}, config: any = {}): Promise<[any, T]> {
   return new Promise((resolve) => {
-    request
-      .get(url, { params, ...config })
-      .then((res: any) => {
-        resolve([null, res.data])
-      })
-      .catch((err: any) => {
-        resolve([err, null])
-      })
+    request.get(url, { params: data, ...config }).then((res) => {
+      resolve([null, res as T])
+    }).catch((err) => {
+      resolve([err, undefined as T])
+    })
   })
 }
