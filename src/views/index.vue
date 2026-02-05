@@ -3,9 +3,9 @@
 </script>
 
 <template>
-  <div class="mt-20 h-full flex select-none text-center all:transition-400">
+  <div class="mt-20 text-center flex h-full select-none all:transition-400">
     <div class="ma">
-      <div class="animate-bounce-alt animate-duration-1s animate-count-infinite text-5xl fw100">
+      <div class="text-5xl fw100 animate-bounce-alt animate-duration-1s animate-count-infinite">
         Hello!
       </div>
     </div>
